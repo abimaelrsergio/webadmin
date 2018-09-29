@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+
+    </h:head>
+
+    <h:body>
+
+        <h:outputStylesheet name="estilos7.css" library="css" />
+        <p:growl id="messages"/>
+
+		<p:ajaxStatus onstart="statusDialog.show();" onsuccess="statusDialog.hide();" />
+	
+		<p:dialog modal="true" showHeader="false" widgetVar="statusDialog" draggable="false"  resizable="false" closable="false">  
+			<p:graphicImage value="/resources/imagens/ajax-loader.gif" />
+		</p:dialog>
+	
+        <div id="estrutura">
+
+            <div id="header">
+
+                <ui:include src="commonHeader.xhtml" />
+
+            </div>
+
+            <div id="content">
+                <div id="conteudo">    
+                    <div id="formulario">
+
+                        <h:form id="formMenu">
+					
+							<p:dialog id="dialogEsqueciSenha" header="#{msg['label.esqueci.minha.senha']}" widgetVar="dlg" resizable="false">
+							    
+						        <h:panelGrid columns="2" style="margin-left: 0px; text-align:left;">
+						          
+						            <h:outputLabel for="username" value="Usuário:" />  
+                                    <p:inputText value="#{sessaoMBean.login}" id="username" required="true" requiredMessage="Digite o usuário" label="login" />  
+  
+						        </h:panelGrid>
+						          
+					            <p:commandButton id="loginButton" value="Solicitar senha" update=":messages" actionListener="#{sessaoMBean.esqueciSenha}" oncomplete="dlg.hide()"/>
+					            
+						    </p:dialog>  
+						
+                        </h:form>
+
+                        <ui:insert name="content" >
+ 							<p:separator/> 
+                            <h:form id="dialogView"  >
+                                
+                                <div align="center" style="width: 300px; margin: 0 auto;">
+                                    
+                                    <p:panel  id="panel1220" header="Entrada" style="margin-bottom:10px;">
+                                    
+                                    	<p:focus context="panel1220"/> 
+                                        
+                                        <h:panelGrid columns="2" style="margin-left: 0px; text-align:left;">  
+
+                                            <h:outputLabel for="username" value="Usuario:" />  
+                                            <p:inputText value="#{sessaoMBean.login}" id="username" required="true" requiredMessage="Digite o usuário" label="login" />  
+
+                                            <h:outputLabel for="senha" value="Senha:" />  
+                                            <p:password value="#{sessaoMBean.senha}" id="senha" required="true" requiredMessage="Digite a senha" label="senha" />  
+
+                                            <p:commandButton id="loginButton" value="Entrar" update=":messages, :dialogView:panel1220" actionListener="#{sessaoMBean.login}"/>  
+
+                                        </h:panelGrid>     
+<ui:remove>                                        
+                                        <p:commandLink onclick="dlg.show()" value="lembrar senha" style="font-size:12px;" />
+</ui:remove>
+                                    </p:panel>
+                                </div>
+                                
+                            </h:form>
+                        </ui:insert> 
+                    </div>
+                </div>
+            </div>
+
+            <div id="footer">
+                <ui:insert name="footer" >
+                    <ui:include src="commonFooter.xhtml" />
+                </ui:insert>
+            </div>
+        </div>
+
+    </h:body>
+
+</html>

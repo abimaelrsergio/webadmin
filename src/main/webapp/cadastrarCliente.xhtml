@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<ui:composition 
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:p="http://primefaces.org/ui"
+    xmlns:ui="http://java.sun.com/jsf/facelets" 
+    template="commonLayout.xhtml">
+    
+	<ui:define name="content">       
+                            
+    	<h:form id="formCli" prependId="false">    	
+
+        	<p:growl id="growl1741" /> 
+        
+	        <p:separator rendered="#{sessaoMBean.clienteExiste}"/> 
+	        
+	        <p:panel  id="painelCont" style="margin-bottom:10px;"  rendered="#{sessaoMBean.clienteExiste}">
+	        
+	        	<h:panelGrid columns="5" id="pngCliAtiv"> 
+	        
+	            	<h:outputLabel value="Cliente: " /> 
+	        		<p:inputText id="clienteAtivo" value="#{clienteMBean.clientePai.pessoaId.nomeCompleto}" size="50" disabled="true"/>
+	
+	                <h:outputLabel value="CNPJ: " style="margin-left: 40px;" />  
+	                <p:inputMask id="cnpjCliAtivo" value="#{clienteMBean.clientePai.pessoaId.cnpjCpf}" style="width: 150px" disabled="true" mask="99.999.999/9999-99"/>  
+	        
+	                <p:commandButton id="btnPesquisar" value="Pesquisar" action="#{clienteMBean.filtrarCliente}" update="@(form)" />
+	
+	            </h:panelGrid>
+	            
+	        </p:panel>         
+        
+			<p:panel id="painel1" style="margin-bottom:10px;" header="Cadastro de Clientes" rendered="#{not empty clienteMBean.clienteSelecionado}">  
+		        
+		        <h:panelGrid id="pgCli" columns="4" rendered="#{clienteMBean.botaoGravar}" > 
+		
+		            <h:outputLabel value="Razão Social:*"/>  
+		            <p:inputText id="razaosocialCli"  value="#{clienteMBean.clienteFilho.pessoaId.nomeCompleto}" label="Razao Social " required="false" size="40" maxlength="100"/>  
+		        
+		            <h:outputLabel value="CNPJ: *"/>  
+		            <p:inputMask id="cnpjCli"  value="#{clienteMBean.clienteFilho.pessoaId.cnpjCpf}" label="Cnpj" required="false" size="30" mask="99.999.999/9999-99"/>  
+							
+					<h:outputLabel value="Tipo:" />
+					<p:selectOneMenu id="selectOneMenu1558" value="#{clienteMBean.clienteFilho.tipoCliente}" >
+						<f:selectItems value="#{clienteMBean.tiposCliente}"/>
+					</p:selectOneMenu>
+
+					<h:outputLabel value="Ativado em:" />
+					<p:inputText value="#{clienteMBean.ativacao.inicio}" readonly="true" disabled="true" size="30" converter="dataConverterNoTime" />	
+					
+					<h:outputLabel value="Endereco:" />
+					<p:inputText id="inputText1622" value="#{clienteMBean.endereco.logradouro}" size="40" maxlength="150"/>
+					
+					<h:outputLabel value="Numero:" />
+					<p:inputText id="inputText1634" value="#{clienteMBean.endereco.numero}" size="30" maxlength="11"/>
+					
+					<h:outputLabel value="Complemento:" />
+					<p:inputText id="inputText1637" value="#{clienteMBean.endereco.complemento}" size="40" maxlength="30"/>
+
+					<h:outputLabel value="Bairro:" />
+					<p:inputText id="inputText1639" value="#{clienteMBean.endereco.bairro}" size="30" maxlength="70"/>
+
+					<h:outputLabel value="UF" />
+					<p:selectOneMenu id="selectOneMenu1111" value="#{clienteMBean.ufId}" >
+						<p:ajax update="selectOneMenu1345, growl1741" />
+						<f:selectItem itemLabel="" itemValue="" />
+						<f:selectItems value="#{clienteMBean.ufs}" var="ufSelected" itemValue="#{ufSelected.ufId}" itemLabel="#{ufSelected.sigla}"/>
+					</p:selectOneMenu>
+					
+					<h:outputLabel value="Municipio" />
+					<p:selectOneMenu id="selectOneMenu1345" value="#{clienteMBean.endereco.municipioId}" converter="municipioConverter">
+						<f:selectItem itemLabel="" itemValue=""/>
+						<f:selectItems value="#{clienteMBean.municipios}" var="municipio" itemValue="#{municipio}" itemLabel="#{municipio.nome}"/>
+					</p:selectOneMenu>
+
+					<h:outputLabel value="CEP:" />
+					<p:inputText id="inputText1638" value="#{clienteMBean.endereco.cep}" size="40" maxlength="10"/>
+					
+					<h:outputLabel value="Telefone" />
+					<h:panelGrid columns="4">
+					
+						<h:outputLabel value="DDD:" />
+						<p:inputText value="#{clienteMBean.telefone.dddAsString}" style="width: 20px" maxlength="2"/>
+						
+						<h:outputLabel value="Numero:" />
+						<p:inputText value="#{clienteMBean.telefone.numero}" size="10" maxlength="20"/>
+						
+					</h:panelGrid>
+
+					<h:outputLabel value="Email:" />
+					<p:inputText id="inputText1138" value="#{clienteMBean.clienteFilho.pessoaId.email}" size="40" maxlength="40"/>
+										
+		        </h:panelGrid> 
+				
+                <h:panelGrid columns="4" id="p4" rendered="#{not sessaoMBean.apoio}">
+                    <p:commandButton value="Incluir"  id="btnIncluir"   style="margin:0" action="#{clienteMBean.novo}"         update="painel1" rendered="#{not clienteMBean.botaoGravar and not empty clienteMBean.clienteSelecionado}" />
+                    <p:commandButton value="Cancelar" id="btnCancelar"  style="margin:0" action="#{clienteMBean.fecharPainel}" update="painel1" rendered="#{clienteMBean.botaoGravar}"/>
+                    <p:commandButton value="Gravar"   id="btnGravar"    style="margin:0" action="#{clienteMBean.gravar}"       update="painel1, painelCont, panel0843, growl1741" rendered="#{not clienteMBean.botaoAtualizar and clienteMBean.botaoGravar}" icon="ui-icon-disk"/>
+                    <p:commandButton value="Gravar"   id="btnAtualizar" style="margin:0" action="#{clienteMBean.atualizar}"    update="painel1, painelCont, panel0843, growl1741" rendered="#{clienteMBean.botaoAtualizar}" icon="ui-icon-disk"/>                                        
+                </h:panelGrid>
+                				
+			</p:panel>
+            
+            <p:separator rendered="#{not empty clienteMBean.clienteSelecionado}" />
+            	 
+           	<p:panel id="panel0843"  style="margin-bottom:10px;" rendered="#{not empty clienteMBean.clienteSelecionado}">
+               	            
+           		<p:dataTable id="dataTable1454" var="clienteDoFilho" value="#{clienteMBean.clientesDoFilho}" lazy="true" styleClass="className" paginator="true" rows="5" paginatorPosition="bottom" rowsPerPageTemplate="5,10,15, 30, 50" >
+           	
+           			<f:facet name="header">  
+               			Clientes Cadastrados ( <h:outputText value="#{clienteMBean.clientesDoFilho.rowCount}"/> registros ) 
+           			</f:facet>
+           			
+	            	<p:column headerText="Razão Social" filterBy="#{clienteDoFilho.pessoaId.nomeCompleto}" sortBy="#{clienteDoFilho.pessoaId.nomeCompleto}">
+	            		<h:outputText value="#{clienteDoFilho.pessoaId.nomeCompleto}"/>
+	                </p:column>           			
+
+	            	<p:column headerText="CNPJ" filterBy="#{clienteDoFilho.pessoaId.cnpjCpf}" sortBy="#{clienteDoFilho.pessoaId.cnpjCpf}">
+	            		<h:outputText value="#{clienteDoFilho.pessoaId.cnpjCpf}" converter="cnpjConverter"/>
+	                </p:column>
+
+	            	<p:column headerText="Ativação">
+	            		<h:outputText value="#{clienteMBean.dataAtivacao(clienteDoFilho)}" converter="dataConverterNoTime"/>
+	                </p:column>
+
+					<p:column headerText="Editar" style="width:4%">
+						<p:commandButton id="commandButton1607" title="Editar" action="#{clienteMBean.editar(clienteDoFilho)}" update="@(#formCli)" icon="ui-icon-pencil" style="width: 25px; height: 25px; margin-left: 5px;" />
+					</p:column>
+
+					<p:column headerText="Excluir" style="width:4%" rendered="#{not sessaoMBean.apoio}">
+						<p:commandButton id="commandButton1643" title="Excluir" oncomplete="confirmacao.show()" icon="ui-icon-trash" style="width: 25px; height: 25px; margin-left: 10px;">
+							<f:setPropertyActionListener target="#{clienteMBean.clienteFilho}" value="#{clienteDoFilho}" />
+						</p:commandButton>
+					</p:column>
+
+				</p:dataTable>
+           		
+			</p:panel>
+
+            <p:confirmDialog id="confirmDialog1644" message="Confirma realmente a exclusão?" header="Exclusão" closable="false" severity="alert" widgetVar="confirmacao">
+                <p:commandButton id="commandButton1645" value="Confirmar" action="#{clienteMBean.excluir}" update="dataTable1454, painel1, growl1741" oncomplete="confirmacao.hide()"/>
+                <p:commandButton id="commandButton1646" value="Cancelar" onclick="confirmacao.hide()" type="button" />
+            </p:confirmDialog>
+            			
+	 	</h:form>
+	
+
+    </ui:define>
+</ui:composition>

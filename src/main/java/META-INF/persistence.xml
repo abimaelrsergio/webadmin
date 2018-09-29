@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+
+	<persistence-unit name="abgiPU" transaction-type="JTA">
+
+		<provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+		<jta-data-source>java:jboss/datasources/abgiPU</jta-data-source>
+
+		<class>br.com.abgi.model.UsuarioEntity</class>
+
+		<properties>
+
+			<property name="eclipselink.target-server" value="JBoss" />
+			<property name="eclipselink.jdbc.batch-writing" value="JDBC" />
+			<property name="eclipselink.ddl-generation" value="create-tables"/> 
+<!-- 			<property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>  -->
+
+			<!-- DEBUG -->
+			<property name="eclipselink.logging.level" value="FINE"/>
+ 			<property name="openjpa.Log" value="DefaultLevel=WARN, Runtime=INFO, Tool=INFO, SQL=TRACE"/>
+
+		</properties>
+
+	</persistence-unit>
+
+</persistence>

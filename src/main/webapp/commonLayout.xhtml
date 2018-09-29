@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://java.sun.com/jsf/facelets" 
+      xmlns:f="http://java.sun.com/jsf/core">
+	
+	<h:head>
+	
+	 
+	
+		<script type="text/javascript">
+		PrimeFaces.locales['pt'] = {
+			    closeText: 'OK',
+			    prevText: 'Anterior',
+			    nextText: 'Próximo',
+			    currentText: 'Agora',
+			    monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+			    monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun', 'Jul','Ago','Set','Out','Nov','Dez'],
+			    dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado'],
+			    dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],
+			    dayNamesMin: ['D','S','T','Q','Q','S','S'],
+			    weekHeader: 'Semana',
+			    firstDay: 0,
+			    isRTL: false,
+			    showMonthAfterYear: false,
+			    yearSuffix: '',
+			    timeOnlyTitle: 'Horas',
+			    timeText: 'Tempo',
+			    hourText: 'Hora',
+			    minuteText: 'Minuto',
+			    secondText: 'Segundo',
+			    ampm: false,
+			    month: 'Mês',
+			    week: 'Semana',
+			    day: 'Dia',
+			    allDayText : 'Todo o Dia'
+			};			
+		</script>
+		
+		<script type="text/javascript">
+            function showStatus() {
+                statusDialog.show();
+            }
+            function hideStatus() {
+            	statusDialog.hide();
+            }
+            function focoProximoCampo(origem, digitos, destino){
+            	if(document.getElementById(origem).value.length==digitos){
+            		document.getElementById(destino).focus();
+            	}
+            }
+        </script>
+		
+		<style>
+			div.ui-datepicker {
+					font-size:13px!important;
+					font-weight: lighter;
+					font-family: Helvetica, Arial, sans-serif;
+			}
+            .ui-datatable .ui-datatable-footer {
+                text-align:left;
+            }			
+		</style>
+		
+		<title>WebAdmin</title>
+	
+</h:head>
+
+   	<h:body>
+
+    <f:view contentType="text/html">
+
+        <h:outputStylesheet name="estilos7.css" library="css" />
+        <p:growl id="messages"/>
+        
+	<p:ajaxStatus onstart="PF('statusDialog').show();" onsuccess="PF('statusDialog').hide();" />
+
+	<p:dialog modal="true" showHeader="false" widgetVar="statusDialog" draggable="false"  resizable="false" closable="false">  
+		<p:graphicImage value="/resources/imagens/ajax-loader.gif" />
+	</p:dialog>
+	
+	<div id="estrutura">
+
+            <div id="header">
+                <ui:insert name="header" >
+                    <ui:include src="commonHeader.xhtml" />
+                </ui:insert>
+            </div>
+
+            <div id="content">
+                <div id="conteudo">    
+                    <div id="formulario">
+
+                        <h:form id="formMenu">
+
+                            <p:menubar id="menuBar1119" autoDisplay="false">   
+                               
+                               <p:submenu id="submenu0913" label="#{msg['menu.label.cadastros']}" style="margin-right: 20px;" >
+                               
+                               	  <p:menuitem id="menuitem0924" value="#{msg['label.clientes']}" url="cadastrarCliente.jsf" />
+                               	
+                               </p:submenu>
+                                  
+                               <p:menuitem id="menuitem0917" value="#{msg['menu.label.sair']}" actionListener="#{sessaoMBean.logout}" style="margin-right: 20px;" icon="ui-icon-close"/>
+                                
+                            </p:menubar>   
+
+                        </h:form>
+
+                        <ui:insert name="content" ></ui:insert>   
+
+                    </div>
+                </div>
+            </div>
+
+            <div id="footer">
+                <ui:insert name="footer" >
+                    <ui:include src="commonFooter.xhtml" />
+                </ui:insert>
+            </div>
+        </div>
+	</f:view>
+    </h:body>
+
+</html>

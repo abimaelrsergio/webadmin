@@ -1,0 +1,157 @@
+body {
+    background-image:url(../imagens/body_bg.png);
+    background-repeat: no-repeat;
+    background-position: center top;
+    background-color: #D9D9D6 !important;
+    margin-top: 0px;
+}
+#estrutura {
+    background-color: #FFF;
+    width: auto;
+    margin-right: auto;
+    margin-left: auto;
+}
+#estrutura #cabecalho {
+    background-color: #FFF;
+
+    background-repeat: no-repeat;
+    background-position: center top;
+    float: none;
+    margin-top: 0px;
+}
+#estrutura #cabecalho #slogan {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    float: left;
+    text-align: right;
+    font-weight: lighter;
+    color: #757575;
+    width: 400px;
+    margin-left: 500px;
+    margin-top: -70px;
+}
+.text_color {
+    color: #91A1FB;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+#header #estrutura #cabecalho #logo {
+    width: 180px;
+    padding-left: 20px;
+    padding-top: 2px;
+    padding-bottom: 10px;
+    padding-right: 50px;
+}
+
+#estrutura #cabecalho #logo {
+    width: 180px;
+    padding-left: 20px;
+    padding-top: 2px;
+    padding-bottom: 10px;
+    padding-right: 50px;
+}
+.testCol1
+{
+}
+
+.testCol2
+{
+    vertical-align: top;
+    text-align: center;
+    font-size: 14px;
+}
+
+.padrao {  
+    background-image: url("../imagens/padrao.png") !important;  
+} 
+
+.padrao2 {  
+    background-image: url("#{resource['imagens/padrao.png']}") !important;  
+} 
+
+.className {
+    vertical-align:top;
+    margin: 0 auto;
+
+    height: 100%;    
+
+}
+
+.className td {
+    vertical-align:top;
+  
+}
+
+#estrutura #cabecalho #menu1{
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    height: 60px;
+    width: 670px;
+    float: right;
+    margin-top: -160px;
+    font-weight: lighter;
+}
+#estrutura #cabecalho #menu1 a {
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    text-decoration: none;
+    color: #757575;
+    height: 60px;
+    width: 122px;
+    padding-top: 50px;
+    padding-left: 12px;
+    display: block;
+    float: left;
+    font-weight: lighter;
+}
+#estrutura #cabecalho #menu1 a:hover {
+    background-image: url(../imagens/menu-principal_hover.png);
+    background-repeat: no-repeat;
+}
+#content #estrutura #conteudo #formulario {
+    padding-right: 20px;
+    padding-left: 20px;
+    font-size: 12px;
+}
+
+#estrutura #conteudo #formulario {
+    padding-right: 20px;
+    padding-left: 20px;
+    font-size: 12px;
+}
+
+#estrutura #conteudo #formulario #imagem{
+
+    padding-left: 20px;
+    padding-top: 2px;
+    padding-bottom: 10px;
+    padding-right: 50px;
+    text-align: center;
+
+}
+
+#estrutura #rodape {
+    font-family: helvetica, arial, "san serif";
+    font-size: 10px;
+    text-align: center;
+    background-image: url(../imagens/rodape_bg.png);
+    background-repeat: repeat;
+    background-position: left;
+    height: 40px;
+    font-weight: lighter;
+    color: #757575;
+
+}
+.ui-datatable .ui-datatable-data .even-row td{  
+    background-color:#f6f6f6; 
+}  
+
+.ui-datatable .ui-datatable-data .odd-row td{  
+    background-color:#FFF5E6;  
+}      
+
+.ui-datatable td.ui-datatable-even-row:hover, .ui-datatable td.ui-datatable-odd-row:hover {
+    background: #FFFACD;
+}
+
